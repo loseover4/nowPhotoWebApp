@@ -1,0 +1,54 @@
+﻿@model nowPhotoWebApp.Models.PhotoModel
+
+@{
+    ViewBag.Title = "Show Photo";
+}
+
+<h2>Details</h2>
+
+@*<div>
+    <h4>PhotoModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Decription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Decription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThumbPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThumbPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOn)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PhotoId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@
+
+<div>
+    <img src=@Model.ImagePath/>
+</div>

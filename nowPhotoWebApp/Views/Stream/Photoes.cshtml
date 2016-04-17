@@ -1,0 +1,51 @@
+﻿@model nowPhotoWebApp.Models.ViewModels.StreamPhotoModel
+<link rel="stylesheet" href="~/Content/themes/PhotoGrid.css" type="text/css" />
+
+@{
+    ViewBag.Title = Model.StreamModel.Title;
+}
+
+@section Scripts {
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+            resizeImg();
+        });
+
+        $(window).resize(function () {
+            resizeImg();
+        });
+
+        function resizeImg() {
+            var cw = $('.imageLi').width();
+            $('.imageThumbnail').css({ 'height': cw + 'px' });
+        };
+
+        function imageOnClick(id) {
+            window.location.href = '/Photo/Details/'+id;
+        };
+    </script>
+}
+<h2>@Model.StreamModel.Title</h2>
+
+@if (Model != null)
+{
+    <p>
+        @Html.ActionLink("Add Photo", "AddPhoto/" + Model.StreamModel.Id);
+    </p>
+    <p>
+        @Html.ActionLink("Add User", "AddUser/" + Model.StreamModel.Id);
+    </p>
+    <ul class="rig columns-4">
+        @foreach (var item in Model.PhotoModelList)
+        {
+            <li class="imageLi">
+                <img src=@item.ImagePath class="imageThumbnail" onclick="imageOnClick(@item.PhotoId)" />
+            </li>
+        }
+    </ul>
+}
+else
+{
+    @:Please Login to Register new account !!
+}

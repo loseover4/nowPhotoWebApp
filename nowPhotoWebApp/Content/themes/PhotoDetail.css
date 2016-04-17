@@ -1,0 +1,83 @@
+﻿.mainContainer{
+    display:inline-flex;
+    width:100%;
+    min-width:600px;
+}
+
+.photoContainer{
+    text-align: center;
+    margin:auto 0;
+    width:80%;
+    float:left;
+}
+
+.mainPhoto{
+    max-width:50%;
+    height:auto;
+}
+
+.navigationButtonContainer
+{
+    height:100%;
+    float:left;
+    width:10%;
+    margin:auto 0;
+    visibility:visible;
+}
+
+.navigationButton
+{
+    height:100px;
+}
+
+@media (max-width: 480px) {
+    .mainContainer{
+        display:inline-flex;
+        width:100%;
+        min-width:0px;
+        position:relative;
+    }
+
+    .photoContainer{
+        text-align: center;
+        margin:auto 0;
+        width:100%;
+        float:left;
+        position:relative;
+    }
+
+	.mainPhoto{
+        max-width:100%;
+        height:auto;
+    }
+
+    .navigationButtonContainer
+    {
+        height:100%;
+        float:inherit;
+        width:auto;
+        margin:auto;
+        position:absolute;
+        z-index:2;
+        /*This is for fix blurry pixel of the below vertical center */
+        transform-style: preserve-3d;
+        /*height:100%;
+        float:left;
+        width:10%;
+        margin:auto 0;*/
+        /*display:none;*/
+    }
+
+    .navigationButton
+    {
+        height:50px;
+        /*This is for vertical center*/
+        transform: translateY(-50%);
+        position: relative;
+        top: 50%;
+    }
+
+    .navigationButtonContainerRight{
+        left:85%;
+    }
+}

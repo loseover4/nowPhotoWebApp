@@ -1,0 +1,21 @@
+﻿@model nowPhotoWebApp.Models.StreamModel
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<h2>Add User to Stream</h2>
+
+@if (Model != null)
+{
+    ViewBag.Title = Model.Title;
+    using (Html.BeginForm("AddUser", "Stream", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken();
+        <div class="form-horizontal">
+            <hr />
+            <input type="text" name="username" class="form-control" style="display:inline" placeholder="Enter new User..."/>
+            <input type="submit" value="Add" class="btn btn-default" />
+        </div>
+    }
+}
+
+

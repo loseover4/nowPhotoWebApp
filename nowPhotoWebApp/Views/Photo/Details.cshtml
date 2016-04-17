@@ -1,0 +1,108 @@
+﻿@using nowPhotoWebApp.Models
+@model nowPhotoWebApp.Models.PhotoDetailModel
+<link rel="stylesheet" href="~/Content/themes/PhotoDetail.css" type="text/css" />
+
+@{
+    ViewBag.Title = "Details";
+}
+
+@section Scripts {
+    <script type="text/JavaScript">                
+        function nextPhotoOnClick(previousPhotoId) {
+            window.location.href = '/Photo/Details/'+previousPhotoId;
+        };
+
+        function previousPhotoOnClick(nextPhotoId) {
+            window.location.href = '/Photo/Details/'+nextPhotoId;
+        };
+        
+        function photoContainerOnClick() {
+            var navContainer = document.getElementsByClassName("navigationButtonContainer");
+            if (navContainer.length > 0) {                
+                var isHidden = (navContainer[0].style.visibility == "hidden");
+                var newDisplayValue = isHidden ? "visible": "hidden";
+                for(var i = 0 ; i < navContainer.length ; i++){
+                    navContainer[i].style.visibility = newDisplayValue;
+                }
+            }
+        }
+    </script>
+}
+
+<div>
+    <p>@Html.ActionLink("Back to List", "Index")</p>
+</div>
+
+<div class="mainContainer">
+    <div class="navigationButtonContainer">
+        @if (Model.Photo.PreviousPhotoId != PhotoModel.IDNotExist)
+            {
+            <img src="~/Content/images/blue arrow left.png" class="navigationButton" onclick="previousPhotoOnClick(@Model.Photo.PreviousPhotoId)" />
+        }
+    </div>
+    @*<div style="position: absolute;width: 100%;height: 100%;margin: auto 0px;">
+        </div>*@
+    <div class="photoContainer"  onclick="photoContainerOnClick()">
+        <img src=@Model.Photo.ImagePath class="mainPhoto" />
+    </div> 
+    <div class="navigationButtonContainer navigationButtonContainerRight">
+        @if (Model.Photo.NextPhotoId != PhotoModel.IDNotExist)
+            {
+            <img src="~/Content/images/blue arrow right.png" class="navigationButton" onclick="nextPhotoOnClick(@Model.Photo.NextPhotoId)" />
+        }
+    </div>
+
+</div>
+<br />
+<br />
+@{
+    Html.RenderPartial("~/Views/PhotoComment/_PhotoCommentList.cshtml", Model.Comments);
+}
+
+@{ 
+    PhotoCommentModel newCommentModel = new PhotoCommentModel();
+    newCommentModel.PhotoId = Model.Photo.PhotoId;
+    newCommentModel.AuthorId = Model.Photo.UserName;
+    Html.RenderPartial("~/Views/PhotoComment/_NewPhotoComment.cshtml", newCommentModel);
+}
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Photo.PhotoId }) |
+</p>*@
+
+@*<h4>PhotoModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo.Decription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo.Decription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo.ImagePath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo.ThumbPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo.ThumbPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo.CreatedOn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo.CreatedOn)
+        </dd>
+
+    </dl>*@

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<nowPhotoWebApp.Models.PhotoCommentModel>
+<link rel="stylesheet" href="~/Content/themes/PhotoComment.css" type="text/css" />
+<h4>Comments</h4>
+    
+@foreach (var item in Model) {
+    <div>
+        <span class="authorName"><b>@Html.DisplayFor(modelItem => item.AuthorFirstName)&nbsp;@Html.DisplayFor(modelItem => item.AuthorLastName)</b></span>
+        &nbsp;&nbsp;@Html.DisplayFor(modelItem => item.Content)
+        <br /><span class="dateText">@Html.DisplayFor(modelItem => item.ModifiedOn, "LongDate")</span>
+    </div>
+    @*<tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedOn)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommentId })
+        </td>
+    </tr>*@
+}
+

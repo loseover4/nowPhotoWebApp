@@ -1,0 +1,50 @@
+﻿@model IEnumerable<nowPhotoWebApp.Models.PhotoModel>
+<link rel="stylesheet" href="~/Content/themes/PhotoGrid.css" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Scripts {
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+            resizeImg();
+        });
+
+        $(window).resize(function () {            
+            resizeImg();
+        });
+
+        function resizeImg() {
+            var cw = $('.imageLi').width();
+            $('.imageThumbnail').css({ 'height': cw + 'px' });
+        };
+
+        function imageOnClick(id) {
+            window.location.href = '/Photo/Details/'+id;
+        };
+    </script>
+}
+<h2>Index</h2>
+
+@if (Model != null)
+{
+    <p>
+        @Html.ActionLink("Add Photo", "Create")
+    </p>
+    <ul class="rig columns-4">
+        @foreach (var item in Model)
+        {
+            <li class="imageLi">
+                <img src=@item.ImagePath class="imageThumbnail" onclick="imageOnClick(@item.PhotoId)"/>
+                @*<h3>@item.PhotoId</h3>
+                <p>@item.Decription</p>*@
+            </li>
+        }
+    </ul>
+}
+else
+{
+    @:Please Login to Register new account !!
+}

@@ -1,0 +1,68 @@
+﻿@model nowPhotoWebApp.Models.ViewModels.StreamPhotoModel
+<link rel="stylesheet" href="~/Content/themes/PhotoGrid.css" type="text/css" />
+@{
+    ViewBag.Title = Model.StreamModel.Title;
+}
+
+@section Scripts {
+    <script type="text/JavaScript">
+
+        $(document).ready(function () {
+            resizeImg();
+
+            $(".thumbnailContainer .thumbnailCheckbox").css('visibility', 'collapse');
+            $(".thumbnailContainer img").click(function(){
+                var $parentDiv = $(this).parent();
+
+                // toogle the checkbox
+                var $checkbox = $parentDiv.find(".thumbnailCheckbox");
+                $checkbox.attr('checked', !$checkbox.attr('checked'));
+
+                // toggle the border                
+                $parentDiv.parent().toggleClass("selectedContainer");
+            });
+        });
+
+        $(window).resize(function () {
+            resizeImg();
+        });
+
+        function resizeImg() {
+            var cw = $('.imageLi').width();
+            $('.imageThumbnail').css({ 'height': cw + 'px' });
+        };
+    </script>
+}
+<h2>Add Photo</h2>
+
+@if (Model != null)
+{
+
+    using (Html.BeginForm("AddPhoto", "Stream", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <ul class="rig columns-4">
+            @foreach (var item in Model.PhotoModelList)
+            {
+                <li class="imageLi">
+                    <div class="thumbnailContainer">
+                        <img src=@item.ImagePath class="imageThumbnail"/>
+                        <input class="thumbnailCheckbox" type="checkbox" name="selectedPhotoIds" value=@item.PhotoId />
+                    </div>
+                    @*<h3>@item.PhotoId</h3>
+                        <p>@item.Decription</p>*@
+                </li>
+            }
+        </ul>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
+        </div>
+    }
+}
+else
+{
+    @:Please Login to Register new account !!
+}
